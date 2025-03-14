@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import CallWeather from "./CallWeather";
 
 const Dashboard = () => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const getUserData = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/dashboard", {
+                const response = await axios.get(`${apiUrl}dashboard`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
@@ -25,6 +27,7 @@ const Dashboard = () => {
 
         getUserData();
     }, []);
+
 
     if (loading) return <p className="text-center mt-10 text-lg">Loading...</p>;
     if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;

@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
-import './App.css'
-import apiCall from './api/api';
+import axios from 'axios';
 
-function CallWeather() {
+const CallWeather=()=> {
 
   const [data, setData] = useState(null);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await apiCall("");
-            setData(result);
+            const result = await axios.get(`${apiUrl}public/greet`, {
+            });
+            setData(result.data);
         };
 
         fetchData();
@@ -27,4 +28,4 @@ function CallWeather() {
 
 }
 
-export default CallWeather
+export default CallWeather;

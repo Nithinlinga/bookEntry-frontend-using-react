@@ -30,7 +30,7 @@ const Navbar = () => {
                             <Link to="/dashboard" className="hover:text-gray-300 transition">Dashboard</Link>
                             <button
                                 onClick={handleLogout}
-                                className="hover:text-gray-300 transition"
+                                className="hover:text-gray-300 transition cursor-pointer"
                             >
                                 Logout
                             </button>

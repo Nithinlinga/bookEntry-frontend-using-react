@@ -6,16 +6,19 @@ const Signup = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [sentiment, setSentiment] = useState(true);
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:8080/public/signup", {
+            await axios.post(`${apiUrl}public/signup`, {
                 username: name,
                 email: email,
                 password: password,
+                sentimentAnalysis: sentiment
             });
 
             navigate("/login"); // Redirect to login page after successful signup
@@ -62,6 +65,31 @@ const Signup = () => {
                             required
                             className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-gray-500 focus:outline-none"
                         />
+                    </div>
+                    <div className="flex items-center gap-4">
+                        <span className="text-gray-700 text-lg font-medium">Sentiment Analysis:</span>
+                        <label className="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                name="sentiment"
+                                value="true"
+                                checked={sentiment === true}
+                                onChange={() => setSentiment(true)}
+                                className="w-5 h-5 text-blue-600 focus:ring focus:ring-blue-300"
+                            />
+                            Yes
+                        </label>
+                        <label className="flex items-center gap-2">
+                            <input
+                                type="radio"
+                                name="sentiment"
+                                value="false"
+                                checked={sentiment === false}
+                                onChange={() => setSentiment(false)}
+                                className="w-5 h-5 text-red-600 focus:ring focus:ring-red-300"
+                            />
+                            No
+                        </label>
                     </div>
                     <button
                         type="submit"

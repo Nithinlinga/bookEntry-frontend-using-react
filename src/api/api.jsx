@@ -1,6 +1,6 @@
 import axios from "axios";
-
-const BASE_URL = "http://localhost:8080/public/greet"; // Change this to your backend URL
+const apiUrl=import.meta.env.VITE_API_URL;
+const BASE_URL = `${apiUrl}public/greet`; // Change this to your backend URL
 
 const apiCall = async (endpoint, method = "GET", data = null) => {
     try {
